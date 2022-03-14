@@ -51,12 +51,16 @@ export default {
   cursor: pointer;
 }
 .card {
-  background-color: rgb(245, 245, 245);
+  border: none;
+  border-radius: 5px;
+  background-color: #b4b4b4;
 }
 .card-title {
   font-weight: bold;
 }
 .card-body {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: white;
 }
 </style>
