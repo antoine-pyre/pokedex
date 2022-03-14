@@ -1,6 +1,12 @@
 <template>
-  <div v-if="pokemon && pokemon.pokemonSpecie" class="card" style="max-width: 18em">
-    <img :src="pokemon.sprites.front_default" class="card-img-top"/>
+  <div v-if="pokemon && pokemon.pokemonSpecie"
+       class="card"
+  >
+    <img :src="hover ? pokemon.sprites.back_default : pokemon.sprites.front_default"
+         class="card-img-top"
+         @mouseover="hover = true"
+         @mouseleave="hover = false"
+    />
     <div class="card-body text-start">
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
       <h5 class="card-title">{{ this.findName(pokemon.pokemonSpecie.names) }}</h5>
@@ -21,6 +27,11 @@ export default {
   props: {
     pokemon: Pokemon
   },
+  data() {
+    return {
+      hover: false
+    }
+  },
   methods: {
     findName: function (names) {
       for (const name of names) {
@@ -36,21 +47,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.card:hover {
+  cursor: pointer;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.card {
+  border: none;
+  border-radius: 5px;
+  background-color: #b4b4b4;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.card-title {
+  font-weight: bold;
 }
-
-a {
-  color: #42b983;
+.card-body {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: white;
 }
 </style>

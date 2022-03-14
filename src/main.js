@@ -8,7 +8,8 @@ import router from './router/index.js';
 // Create a new store instance.
 
 const app = createApp(App)
-app.use(store);
+app.use(store)
 app.use(router);
+store.commit('listAllTypes')
 app.mount('#app')
 
