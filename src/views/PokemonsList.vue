@@ -1,8 +1,10 @@
 <template>
-  <div v-if="pokemons && pokemons.length > 0" class="grid" style="margin-bottom: 50px">
-    <div class="row" style="margin-bottom: 30px">
-      <div v-for="pokemon in pokemons" :key="pokemon.id" class="col-2">
-        <app-pokemon-card :pokemon="pokemon" class="pokemon-card" />
+  <div class="container">
+    <div v-if="pokemons && pokemons.length > 0" class="grid" style="margin-bottom: 50px">
+      <div class="row" style="margin-bottom: 30px">
+        <div v-for="pokemon in pokemons" :key="pokemon.id" class="col-6 col-lg-4 col-xl-3">
+          <app-pokemon-card :pokemon="pokemon" class="pokemon-card" />
+        </div>
       </div>
     </div>
   </div>
