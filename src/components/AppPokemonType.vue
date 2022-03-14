@@ -1,6 +1,6 @@
 <template>
  <span v-if="localeType" class="badge" v-bind:class="type.type.name">
-   {{localeType.name}}
+   {{localeType}}
  </span>
 </template>
 
@@ -12,22 +12,11 @@ export default {
   props: {
     type: PokemonType
   },
-  data() {
-    return {
-      localeType: null
+  computed: {
+    localeType() {
+      return this.$store.getters.getLocalTypeFromTypeName(this.type.type.name);
     }
   },
-  mounted() {
-    for (const type of this.$store.state.types) {
-      if (type.name === this.type.type.name) {
-        for (const name of type.names) {
-          if (name.language.name === this.$store.state.locale) {
-            this.localeType = name;
-          }
-        }
-      }
-    }
-  }
 }
 </script>
 

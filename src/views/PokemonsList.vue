@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     pokemons() {
-      return this.$store.state.pokemons.list;
+      return this.$store.getters.getPokemonsList
     }
   },
   methods: {

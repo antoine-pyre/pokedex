@@ -1,7 +1,6 @@
 <template>
-  <div class="home">
-    {{ this.$route.params.id }}
-    {{ this.pokemon }}
+  <div class="home" v-if="pokemon">
+    <h1>{{ this.pokemon.names }}</h1>
   </div>
 </template>
 
@@ -11,7 +10,7 @@ export default {
   name: "AppPokemonPage",
   computed: {
     pokemon () {
-      return this.$store.getters.getPokemonById(this.$route.params.id)
+      return this.$store.getters.getById(this.$route.params.id)
     }
   }
 }

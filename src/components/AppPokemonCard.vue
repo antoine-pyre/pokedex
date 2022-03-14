@@ -9,7 +9,7 @@
     />
     <div class="card-body text-start">
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
-      <h5 class="card-title">{{ this.findName(pokemon.pokemonSpecie.names) }}</h5>
+      <h5 class="card-title">{{ name }}</h5>
       <span v-for="type in pokemon.types" :key="type.slot" style="margin: 2px">
         <app-pokemon-type :type="type"></app-pokemon-type>
       </span>
@@ -32,14 +32,12 @@ export default {
       hover: false
     }
   },
-  methods: {
-    findName: function (names) {
-      for (const name of names) {
-        if (name.language.name === this.$store.state.locale) {
-          return name.name;
-        }
+  computed: {
+    name() {
+      if (this.pokemon) {
+        return this.$store.getters.getName(this.pokemon);
       }
-      return '';
+      return ''
     }
   }
 }
