@@ -5,12 +5,11 @@
         <app-pokemon-card :pokemon="pokemon" class="pokemon-card" />
       </div>
     </div>
-    <button type="button" class="btn btn-primary" v-on:click="getNextPokemons">Charger plus de pokémons</button>
   </div>
+  <button type="button" class="btn btn-primary" v-on:click="getNextPokemons">Charger plus de pokémons</button>
 </template>
 
 <script>
-import {PokemonClient} from "pokenode-ts";
 import AppPokemonCard from "@/components/AppPokemonCard";
 
 export default {
@@ -19,33 +18,20 @@ export default {
   components: {
     AppPokemonCard
   },
-  data() {
-    return {
-      pokemons: [],
-      currentOffset: 0,
-      limit: 20
+  computed: {
+    pokemons() {
+      return this.$store.state.pokemons.list;
     }
   },
   methods: {
     getNextPokemons() {
-      (async () => {
-        // this.$store.commit('increment')
-        // console.log(this.$store.state.count)
-        const api = new PokemonClient();
-
-        api.listPokemons(this.currentOffset, this.limit)
-            .then((pokemons) => {
-              for (const pokemon of pokemons.results) {
-                api.getPokemonByName(pokemon.name)
-                    .then((pokemon) => this.pokemons.push(pokemon));
-              }
-              this.currentOffset += this.limit
-            });
-      })();
+      this.$store.commit('getNextPokemons', 20);
     }
   },
   mounted() {
-    this.getNextPokemons();
+    if (this.pokemons.length === 0) {
+      this.getNextPokemons();
+    }
   }
 }
 </script>
