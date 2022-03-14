@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" v-on:click="getNextPokemons">Charger plus de pokémons</button>
+  <button type="button" class="btn btn-primary" v-on:click="findNextPokemons">Charger plus de pokémons</button>
 </template>
 
 <script>
@@ -28,14 +28,12 @@ export default {
     }
   },
   methods: {
-    getNextPokemons() {
-      this.$store.commit('getNextPokemons', 20);
+    findNextPokemons() {
+      this.$store.commit('findNextPokemons', 20);
     }
   },
   mounted() {
-    if (this.pokemons.length === 0) {
-      this.getNextPokemons();
-    }
+    this.$store.commit('findFirstPokemons', 20)
   }
 }
 </script>

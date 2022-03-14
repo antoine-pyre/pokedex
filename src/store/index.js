@@ -6,39 +6,79 @@ const store = createStore({
     return {
       pokemons: {
         list: [],
-        currentOffset: 0
+        currentOffset: 0,
+        limit: 20
       },
       locale: 'fr',
       types: []
     }
   },
+  getters: {
+    getPokemonById: (state) => (id) => {
+      for (const pokemon of state.pokemons.list) {
+        if (pokemon.id.toString() === id) {
+          return pokemon;
+        }
+      }
+      store.commit('findPokemonById', id)
+      return null;
+    }
+  },
   mutations: {
-    getPokemonByName(state, name) {
+    completePokemon(state, pokemon) {
+      const api = new PokemonClient();
+
+      api.getPokemonSpeciesById(pokemon.id)
+        .then((pokemonSpecie) => {
+          pokemon.pokemonSpecie = pokemonSpecie;
+
+          state.pokemons.list.push(pokemon)
+          state.pokemons.list.sort((a, b) => {
+            return a.id > b.id;
+          })
+        });
+    },
+    findPokemonById(state, id) {
+      const api = new PokemonClient();
+
+      api.getPokemonById(id)
+        .then((pokemon) => {
+          store.commit('completePokemon', pokemon)
+        });
+    },
+    findPokemonByName(state, name) {
       const api = new PokemonClient();
 
       api.getPokemonByName(name)
         .then((pokemon) => {
-
-          api.getPokemonSpeciesById(pokemon.id)
-            .then((pokemonSpecie) => {
-              pokemon.pokemonSpecie = pokemonSpecie;
-
-              state.pokemons.list.push(pokemon)
-              state.pokemons.list.sort((a, b) => {
-                return a.id > b.id;
-              })
-            });
+          store.commit('completePokemon', pokemon)
         });
     },
-    getNextPokemons(state, limit) {
+    findNextPokemons(state) {
       const api = new PokemonClient();
 
-      api.listPokemons(state.pokemons.currentOffset, limit)
+      api.listPokemons(state.pokemons.currentOffset, state.pokemons.limit)
         .then((pokemons) => {
           for (const pokemon of pokemons.results) {
-            store.commit('getPokemonByName', pokemon.name)
+            store.commit('findPokemonByName', pokemon.name)
           }
-          state.pokemons.currentOffset += limit
+          state.pokemons.currentOffset += state.pokemons.limit
+        });
+    },
+    findFirstPokemons(state) {
+      const api = new PokemonClient();
+
+      this.state.pokemons = {
+        list: [],
+        currentOffset: 0,
+        limit: 20
+      }
+      api.listPokemons(state.pokemons.currentOffset, state.pokemons.limit)
+        .then((pokemons) => {
+          for (const pokemon of pokemons.results) {
+            store.commit('findPokemonByName', pokemon.name)
+          }
+          state.pokemons.currentOffset += state.pokemons.limit
         });
     },
     listAllTypes(state) {
