@@ -1,15 +1,11 @@
 <template>
-  <app-pokedex></app-pokedex>
+  <!--app-pokedex></app-pokedex-->
+  <div id="nav">
+    <router-link to="/">Pokedex</router-link> |
+    <router-link :to="{name: 'pokemon_page', params: { id: 1 } }">Pokemon details</router-link>
+  </div>
+  <router-view/>
 </template>
-
-<script>
-
-import AppPokedex from "@/components/AppPokedex";
-export default {
-  name: 'App',
-  components: { AppPokedex },
-}
-</script>
 
 <style>
 #app {
