@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <button v-on:click="clicked">TEST</button>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -31,10 +32,34 @@
 </template>
 
 <script>
+import { PokemonClient } from "pokenode-ts";
+import { UtilityClient } from "pokenode-ts"; // import the UtilityClient
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    clicked: function () {
+      console.log('function');
+      (async () => {
+        const api = new PokemonClient();
+
+        await api
+            .getPokemonById(1)
+            .then((data) => console.log(data)) // will output "Luxray"
+            .catch((error) => console.error(error));
+      })();
+      (async () => {
+        const api = new UtilityClient(); // create a UtilityClient
+
+        await api
+            .getLanguageByName('fr') // using method getLanguageById()
+            .then((response) => console.log(response))
+            .catch((error) => console.error(error));
+      })();
+    }
   }
 }
 </script>

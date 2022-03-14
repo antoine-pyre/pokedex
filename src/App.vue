@@ -1,16 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <app-pokedex></app-pokedex>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
+import AppPokedex from "@/components/AppPokedex";
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: { AppPokedex },
 }
 </script>
 
