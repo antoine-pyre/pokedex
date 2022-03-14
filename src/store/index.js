@@ -8,12 +8,14 @@ const store = createStore({
         list: [],
         currentOffset: 0
       },
-      locale: 'fr'
+      locale: 'fr',
+      types: []
     }
   },
   mutations: {
     getPokemonByName(state, name) {
       const api = new PokemonClient();
+
       api.getPokemonByName(name)
         .then((pokemon) => {
 
@@ -39,8 +41,18 @@ const store = createStore({
           state.pokemons.currentOffset += limit
         });
     },
-    increment(state) {
-      state.count++
+    listAllTypes(state) {
+      const api = new PokemonClient();
+
+      api.listTypes()
+        .then((types) => {
+          for (const type of types.results) {
+            api.getTypeByName(type.name)
+              .then((t) => {
+                state.types.push(t);
+              })
+          }
+        })
     }
   }
 })
