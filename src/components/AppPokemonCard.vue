@@ -2,12 +2,8 @@
   <div v-if="pokemon && pokemon.pokemonSpecie"
        class="card"
   >
-    <img :src="hover ? pokemon.sprites.back_default : pokemon.sprites.front_default"
-         class="card-img-top"
-         @mouseover="hover = true"
-         @mouseleave="hover = false"
-    />
-    <div class="card-body text-start">
+    <app-pokemon-picture :sprites="pokemon.sprites" class="card-img"/>
+    <div class="card-body text-start" @click="$emit('pokemon-selected')">
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
       <h5 class="card-title">{{ name }}</h5>
       <span v-for="type in pokemon.types" :key="type.slot" style="margin: 2px">
@@ -20,10 +16,11 @@
 <script>
 import AppPokemonType from "@/components/AppPokemonType";
 import {Pokemon} from "pokenode-ts";
+import AppPokemonPicture from "@/components/AppPokemonPicture";
 
 export default {
   name: 'AppPokemonCard',
-  components: { AppPokemonType },
+  components: { AppPokemonPicture, AppPokemonType },
   props: {
     pokemon: Pokemon
   },
@@ -35,7 +32,7 @@ export default {
   computed: {
     name() {
       if (this.pokemon) {
-        return this.$store.getters.getName(this.pokemon);
+        return this.$store.getters.getPokemonLocaleNameFromPokemon(this.pokemon);
       }
       return ''
     }
@@ -45,9 +42,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.card:hover {
-  cursor: pointer;
-}
 .card {
   border: none;
   border-radius: 5px;
@@ -55,6 +49,9 @@ export default {
 }
 .card-title {
   font-weight: bold;
+}
+.card-body:hover {
+  cursor: pointer;
 }
 .card-body {
   border-bottom-left-radius: 5px;

@@ -3,9 +3,7 @@
     <div v-if="pokemons && pokemons.length > 0" class="grid" style="margin-bottom: 50px">
       <div class="row" style="margin-bottom: 30px">
         <div v-for="pokemon in pokemons" :key="pokemon.id" class="col-6 col-lg-4 col-xl-3">
-          <router-link :to="{name: 'pokemon_page', params: { id: pokemon.id } }">
-            <app-pokemon-card :pokemon="pokemon" class="pokemon-card" />
-          </router-link>
+          <app-pokemon-card :pokemon="pokemon" class="pokemon-card" @pokemon-selected="goToPokemon(pokemon)"/>
         </div>
       </div>
     </div>
@@ -28,6 +26,9 @@ export default {
     }
   },
   methods: {
+    goToPokemon(pokemon) {
+      this.$router.push({name : 'pokemon_page', params : {id: pokemon.id}})
+    },
     findNextPokemons() {
       this.$store.commit('findNextPokemons', 20);
     }

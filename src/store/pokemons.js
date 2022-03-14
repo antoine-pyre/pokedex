@@ -16,9 +16,9 @@ const pokemons = {
       return state.pokemons.list;
     },
     // eslint-disable-next-line no-unused-vars
-    getName: (state, getters, rootState, rootGetters) => (pokemon) => {
+    getPokemonLocaleNameFromPokemon: (state, getters, rootState, rootGetters) => (pokemon) => {
       if (pokemon && pokemon.pokemonSpecie && pokemon.pokemonSpecie.names) {
-        return store.getters.getLocaleName(pokemon.pokemonSpecie.names);
+        return rootGetters.getLocaleName(pokemon.pokemonSpecie.names);
       }
       return '';
     },
