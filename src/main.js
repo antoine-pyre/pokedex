@@ -8,5 +8,6 @@ import store from './store/index.js'
 
 const app = createApp(App)
 app.use(store)
+store.commit('listAllTypes')
 app.mount('#app')
 
