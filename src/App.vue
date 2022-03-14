@@ -1,5 +1,4 @@
 <template>
-  <!--app-pokedex></app-pokedex-->
   <div id="nav">
     <router-link to="/">Pokedex</router-link> |
     <router-link :to="{name: 'pokemon_page', params: { id: 1 } }">Pokemon details</router-link>
