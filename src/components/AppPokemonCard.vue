@@ -1,9 +1,9 @@
 <template>
-  <div v-if="pokemon" class="card" style="max-width: 18em">
+  <div v-if="pokemon && pokemon.pokemonSpecie" class="card" style="max-width: 18em">
     <img :src="pokemon.sprites.front_default" class="card-img-top"/>
     <div class="card-body text-start">
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
-      <h5 class="card-title">{{ pokemon.name.replace(/^\w/, (c) => c.toUpperCase()) }}</h5>
+      <h5 class="card-title">{{ this.findName(pokemon.pokemonSpecie.names) }}</h5>
       <span v-for="type in pokemon.types" :key="type.slot" style="margin: 2px">
         <app-pokemon-type :type="type"></app-pokemon-type>
       </span>
@@ -22,9 +22,13 @@ export default {
     pokemon: Pokemon
   },
   methods: {
-    capitalize: function (s) {
-      if (typeof s !== 'string') return ''
-      return s.charAt(0).toUpperCase() + s.slice(1)
+    findName: function (names) {
+      for (const name of names) {
+        if (name.language.name === this.$store.state.locale) {
+          return name.name;
+        }
+      }
+      return '';
     }
   }
 }

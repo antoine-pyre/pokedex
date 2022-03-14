@@ -8,18 +8,24 @@ const store = createStore({
         list: [],
         currentOffset: 0
       },
+      locale: 'fr'
     }
   },
   mutations: {
     getPokemonByName(state, name) {
       const api = new PokemonClient();
-
       api.getPokemonByName(name)
         .then((pokemon) => {
-          state.pokemons.list.push(pokemon)
-          state.pokemons.list.sort((a, b) => {
-            return a.id > b.id;
-          })
+
+          api.getPokemonSpeciesById(pokemon.id)
+            .then((pokemonSpecie) => {
+              pokemon.pokemonSpecie = pokemonSpecie;
+
+              state.pokemons.list.push(pokemon)
+              state.pokemons.list.sort((a, b) => {
+                return a.id > b.id;
+              })
+            });
         });
     },
     getNextPokemons(state, limit) {
