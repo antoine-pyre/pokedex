@@ -1,5 +1,4 @@
 <template>
-  <app-pokemon-search></app-pokemon-search>
   <div class="container">
     <div v-if="pokemons && pokemons.length > 0" class="grid" style="margin-bottom: 50px">
       <div class="row" style="margin-bottom: 30px">
@@ -16,13 +15,11 @@
 
 <script>
 import AppPokemonCard from "@/components/AppPokemonCard";
-import AppPokemonSearch from "@/components/AppPokemonSearch";
 
 export default {
   name: "AppPokedex",
 
   components: {
-    AppPokemonSearch,
     AppPokemonCard
   },
   computed: {
