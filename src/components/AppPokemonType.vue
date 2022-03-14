@@ -1,6 +1,6 @@
 <template>
  <span v-if="type" class="badge bg-secondary">
-   {{type.type.name}}
+   {{type.type.name.replace(/^\w/, (c) => c.toUpperCase())}}
  </span>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
   <div v-if="pokemon" class="card" style="max-width: 18em">
     <img :src="pokemon.sprites.front_default" class="card-img-top"/>
-    <div class="card-body">
-      <h5 class="card-title">{{this.capitalize(pokemon.name)}}</h5>
+    <div class="card-body text-start">
+      <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
+      <h5 class="card-title">{{ pokemon.name.replace(/^\w/, (c) => c.toUpperCase()) }}</h5>
       <span v-for="type in pokemon.types" :key="type.slot" style="margin: 2px">
         <app-pokemon-type :type="type"></app-pokemon-type>
       </span>
@@ -21,7 +22,7 @@ export default {
     pokemon: Pokemon
   },
   methods: {
-     capitalize : function (s) {
+    capitalize: function (s) {
       if (typeof s !== 'string') return ''
       return s.charAt(0).toUpperCase() + s.slice(1)
     }
@@ -34,14 +35,17 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }
