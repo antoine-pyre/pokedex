@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  pokedex:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pokedex
+    restart: always
+    ports:
+      - "8080:8080"
