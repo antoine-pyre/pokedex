@@ -9,6 +9,7 @@
         <div v-for="flavorText in flavorTexts" :key="flavorText.id">
           <app-pokemon-flavor-text :flavorText="flavorText"/>
         </div>
+        <app-pokemon-details :pokemon="pokemon"/>
       </div>
     </div>
   </div>
@@ -17,11 +18,12 @@
 
 <script>
 import AppPokemonPicture from "@/components/AppPokemonPicture";
+import AppPokemonDetails from "@/components/AppPokemonDetails";
 import AppPokemonFlavorText from "@/components/AppPokemonFlavorText";
 
 export default {
   name: "AppPokemonPage",
-  components: { AppPokemonPicture, AppPokemonFlavorText },
+  components: { AppPokemonDetails, AppPokemonPicture, AppPokemonFlavorText },
   computed: {
     pokemon () {
       return this.$store.getters.getPokemonById(this.$route.params.id)
