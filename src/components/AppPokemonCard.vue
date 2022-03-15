@@ -7,7 +7,7 @@
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
       <h5 class="card-title">{{ name }}</h5>
       <span v-for="type in pokemon.types" :key="type.slot" style="margin: 2px">
-        <app-pokemon-type :type="type"></app-pokemon-type>
+        <app-pokemon-type :type="type.type"></app-pokemon-type>
       </span>
     </div>
   </div>

@@ -6,7 +6,8 @@
         <app-pokemon-picture class="pokemon-picture" :sprites="pokemon.sprites"/>
       </div>
       <div class="col-12 col-md-8 col-lg-6">
-        <p>{{flavorTexts}}</p>
+        <app-pokemon-details :pokemon="pokemon"/>
+<!--        <p>{{flavorTexts}}</p>-->
       </div>
     </div>
   </div>
@@ -15,9 +16,10 @@
 
 <script>
 import AppPokemonPicture from "@/components/AppPokemonPicture";
+import AppPokemonDetails from "@/components/AppPokemonDetails";
 export default {
   name: "AppPokemonPage",
-  components: { AppPokemonPicture },
+  components: { AppPokemonDetails, AppPokemonPicture },
   computed: {
     pokemon () {
       return this.$store.getters.getPokemonById(this.$route.params.id)
