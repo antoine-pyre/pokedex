@@ -1,20 +1,17 @@
 <template>
- <span v-if="localeType" class="badge" v-bind:class="type.type.name">
-   {{localeType}}
- </span>
+    <small>{{localeVersion}}</small>
+    <p>{{flavorText.flavor_text}}</p>
 </template>
 
 <script>
-import {PokemonType} from "pokenode-ts";
-
 export default {
-  name: "AppPokemonType",
+  name: "AppPokemonFlavorText",
   props: {
-    type: PokemonType
+    flavorText: Object
   },
   computed: {
-    localeType() {
-      return this.$store.getters.getLocalTypeFromTypeName(this.type.type.name);
+    localeVersion() {
+      return this.$store.getters.getLocalVersionFromVersionName(this.flavorText.version.name);
     }
   },
 }
