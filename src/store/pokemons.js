@@ -35,7 +35,7 @@ const pokemons = {
       }
       return '';
     },
-    getById: (state) => (id) => {
+    getPokemonById: (state) => (id) => {
       for (const pokemon of state.pokemons.list) {
         if (pokemon.id.toString() === id) {
           return pokemon;

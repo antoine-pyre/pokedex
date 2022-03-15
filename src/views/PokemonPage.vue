@@ -23,9 +23,10 @@ export default {
   components: { AppPokemonPicture },
   computed: {
     pokemon () {
-      return this.$store.getters.getById(this.$route.params.id)
+      return this.$store.getters.getPokemonById(this.$route.params.id)
     },
     name() {
+      console.log(this.pokemon)
       return this.$store.getters.getPokemonLocaleNameFromPokemon(this.pokemon);
     },
     flavorTexts() {
@@ -36,6 +37,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  border-radius: 5px;
+}
 .home {
   background-color: white;
 }
