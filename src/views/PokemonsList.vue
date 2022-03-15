@@ -3,12 +3,12 @@
     <div v-if="pokemons && pokemons.length > 0" class="grid" style="margin-bottom: 50px">
       <div class="row" style="margin-bottom: 30px">
         <div v-for="pokemon in pokemons" :key="pokemon.id" class="col-6 col-lg-4 col-xl-3">
-          <app-pokemon-card :pokemon="pokemon" class="pokemon-card" />
+          <app-pokemon-card :pokemon="pokemon" class="pokemon-card" @pokemon-selected="goToPokemon(pokemon)"/>
         </div>
       </div>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" v-on:click="getNextPokemons">Charger plus de pokémons</button>
+  <button type="button" class="btn btn-primary" v-on:click="findNextPokemons">Charger plus de pokémons</button>
 </template>
 
 <script>
@@ -22,18 +22,19 @@ export default {
   },
   computed: {
     pokemons() {
-      return this.$store.state.pokemons.list;
+      return this.$store.getters.getPokemonsList
     }
   },
   methods: {
-    getNextPokemons() {
-      this.$store.commit('getNextPokemons', 20);
+    goToPokemon(pokemon) {
+      this.$router.push({name : 'pokemon_page', params : {id: pokemon.id}})
+    },
+    findNextPokemons() {
+      this.$store.commit('findNextPokemons', 20);
     }
   },
   mounted() {
-    if (this.pokemons.length === 0) {
-      this.getNextPokemons();
-    }
+    this.$store.commit('findFirstPokemons', 20)
   }
 }
 </script>
