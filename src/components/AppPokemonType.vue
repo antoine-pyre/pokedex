@@ -1,20 +1,21 @@
 <template>
- <span v-if="localeType" class="badge" v-bind:class="type.type.name">
+ <span v-if="localeType" class="badge" v-bind:class="type.name">
    {{localeType}}
  </span>
 </template>
 
 <script>
-import {PokemonType} from "pokenode-ts";
-
 export default {
   name: "AppPokemonType",
   props: {
-    type: PokemonType
+    type: null
   },
   computed: {
     localeType() {
-      return this.$store.getters.getLocalTypeFromTypeName(this.type.type.name);
+      if (this.type) {
+        return this.$store.getters.getLocalTypeFromTypeName(this.type.name);
+      }
+      return ''
     }
   },
 }

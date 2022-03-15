@@ -17,6 +17,11 @@ const locale = {
           }
         }
       }
+      for (const name of names) {
+        if (name.language.name === 'en') {
+          return name.name;
+        }
+      }
       return '';
     }
   }
