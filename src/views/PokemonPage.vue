@@ -1,8 +1,14 @@
 <template>
   <div class="home container" v-if="pokemon">
     <h1>{{ name }}</h1>
-    <p>{{flavorTexts}}</p>
-    <app-pokemon-picture :sprites="pokemon.sprites"/>
+    <div class="row">
+      <div class="col-12 col-md-4 col-lg-6">
+        <app-pokemon-picture class="pokemon-picture" :sprites="pokemon.sprites"/>
+      </div>
+      <div class="col-12 col-md-8 col-lg-6">
+        <p>{{flavorTexts}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,5 +35,9 @@ export default {
 <style scoped>
 .home {
   background-color: white;
+}
+.pokemon-picture  {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="sprites" style="position: relative;">
+  <div v-if="sprites" class="app-pokemon-picture">
     <img :src="hover ? shiny ? sprites.back_shiny : sprites.back_default : shiny ? sprites.front_shiny : sprites.front_default"
          class="card-img-top"
          @mouseover="hover = true"
@@ -30,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+.app-pokemon-picture {
+  position: relative;
+}
 .shiney-container {
   padding: 5px;
   position: absolute;
