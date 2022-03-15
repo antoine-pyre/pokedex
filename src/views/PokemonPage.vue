@@ -6,7 +6,10 @@
         <app-pokemon-picture class="pokemon-picture" :sprites="pokemon.sprites"/>
       </div>
       <div class="col-12 col-md-8 col-lg-6">
-        <p>{{flavorTexts}}</p>
+        <div v-for="flavorText in flavorTexts" :key="flavorText.id">
+          <h3>{{flavorText.version.name}}</h3>
+          <small>{{flavorText.flavor_text}}</small>
+        </div>
       </div>
     </div>
   </div>

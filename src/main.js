@@ -11,5 +11,6 @@ const app = createApp(App)
 app.use(store)
 app.use(router);
 store.commit('listAllTypes')
+store.commit('listAllVersions')
 app.mount('#app')
 
