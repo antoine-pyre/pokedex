@@ -1,6 +1,7 @@
 <template>
   <div class="home container" v-if="pokemon">
     <h1>{{ name }}</h1>
+    <p>{{flavorTexts}}</p>
     <app-pokemon-picture :sprites="pokemon.sprites"/>
   </div>
 </template>
@@ -17,6 +18,9 @@ export default {
     },
     name() {
       return this.$store.getters.getPokemonLocaleNameFromPokemon(this.pokemon);
+    },
+    flavorTexts() {
+      return this.$store.getters.getPokemonLocaleFlavorTextsFromPokemon(this.pokemon);
     }
   }
 }

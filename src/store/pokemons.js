@@ -15,7 +15,20 @@ const pokemons = {
     getPokemonsList: (state) => {
       return state.pokemons.list;
     },
-    // eslint-disable-next-line no-unused-vars
+    getPokemonLocaleFlavorTextsFromPokemon: (state, getters, rootState, rootGetters) => (pokemon) => {
+      if (pokemon && pokemon.pokemonSpecie && pokemon.pokemonSpecie.flavor_text_entries) {
+        const locale = rootGetters.getLocale;
+        const resultList = [];
+
+        for (const flavor_text_entry of pokemon.pokemonSpecie.flavor_text_entries) {
+          if (flavor_text_entry.language.name === locale) {
+            resultList.push(flavor_text_entry);
+          }
+        }
+        return resultList;
+      }
+      return [];
+    },
     getPokemonLocaleNameFromPokemon: (state, getters, rootState, rootGetters) => (pokemon) => {
       if (pokemon && pokemon.pokemonSpecie && pokemon.pokemonSpecie.names) {
         return rootGetters.getLocaleName(pokemon.pokemonSpecie.names);

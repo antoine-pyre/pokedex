@@ -6,6 +6,9 @@ const locale = {
     }
   },
   getters: {
+    getLocale: (state) => {
+      return state.locale;
+    },
     getLocaleName: (state) => (names) => {
       if (names) {
         for (const name of names) {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="sprites">
+  <div v-if="sprites" style="position: relative;">
     <img :src="hover ? shiny ? sprites.back_shiny : sprites.back_default : shiny ? sprites.front_shiny : sprites.front_default"
          class="card-img-top"
          @mouseover="hover = true"

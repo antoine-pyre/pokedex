@@ -2,7 +2,7 @@
   <div v-if="pokemon && pokemon.pokemonSpecie"
        class="card"
   >
-    <app-pokemon-picture :sprites="pokemon.sprites" class="card-img"/>
+    <app-pokemon-picture class="card-img" :sprites="pokemon.sprites"/>
     <div class="card-body text-start" @click="$emit('pokemon-selected')">
       <h6 class="card-subtitle text-muted">No.{{ pokemon.id }}</h6>
       <h5 class="card-title">{{ name }}</h5>
